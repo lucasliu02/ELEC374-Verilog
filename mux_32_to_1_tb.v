@@ -70,6 +70,5 @@ module mux_32_to_1_tb;
 		#50 select <= 5'd0;	// R0
 		#50 select <= 5'd22;	// In.Port
 		#50 select <= 5'd16;	// HI
-	end
-	
+	end	
 endmodule

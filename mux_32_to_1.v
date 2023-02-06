@@ -63,4 +63,3 @@ module mux_32_to_1(
 		endcase
 	end
 endmodule
-

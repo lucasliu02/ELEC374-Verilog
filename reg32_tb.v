@@ -22,6 +22,5 @@ module reg32_tb;
 		#50 d <= 32'hFB02;	// d = 0b1111101100000010
 		#50 clr <= 1;			// q = 0
 	end
-	
 endmodule
 			
