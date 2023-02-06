@@ -65,7 +65,7 @@ module mux_32_to_1_tb;
 		BusMuxIn_R0 <= 32'h0;
 		BusMuxIn_R3 <= 32'h8;
 		BusMuxIn_HI <= 32'h10000;
-		BusMuxIn_In_Port <= 32'400000;
+		BusMuxIn_In_Port <= 32'h400000;
 		#50 select <= 5'd3;	// R3
 		#50 select <= 5'd0;	// R0
 		#50 select <= 5'd22;	// In.Port
