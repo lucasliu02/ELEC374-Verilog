@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module add_32_bit(input [31:0] Ra, input [31:0] Rb, input wire cin, output wire[31:0] sum, output wire cout);
+module add_32(input [31:0] Ra, input [31:0] Rb, input wire cin, output wire[31:0] sum, output wire cout);
 wire cout1;
 
 CLA16 CLA1(.Ra(Ra[15:0]), .Rb(Rb[15:0]), .cin(cin), .sum(sum[15:0]), .cout(cout1));

@@ -14,4 +14,3 @@ module reg32(
 			q = d;
 	end
 endmodule
-				

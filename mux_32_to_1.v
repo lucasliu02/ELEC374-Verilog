@@ -1,7 +1,3 @@
-// currently will not compile due to insufficient IO input pads on device
-// common problem amongst groups?
-// waiting on TA announcement on OnQ
-
 module mux_32_to_1(
 	input [31:0] BusMuxIn_R0,
 	input [31:0] BusMuxIn_R1,
