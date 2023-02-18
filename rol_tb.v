@@ -1,15 +1,15 @@
 `timescale 1ns / 10ps
-module shr_tb;
+module rol_tb;
 	reg [31:0] data_in;
-	reg [31:0] num_shifts;
+	reg [31:0] num_rotates;
 	wire [31:0] data_out;
 	
-	shr_32 shr_32_instance(data_in, num_shifts, data_out);
+	rol_32 rol_32_instance(data_in, num_rotates, data_out);
 	
 	initial
 		begin
 			data_in <= 32'hA7;
-			num_shifts <= 3;
+			num_rotates <= 3;
 			
 		end
 

@@ -1,10 +1,10 @@
 `timescale 1ns / 10ps
-module shr_tb;
+module shl_tb;
 	reg [31:0] data_in;
 	reg [31:0] num_shifts;
 	wire [31:0] data_out;
 	
-	shr_32 shr_32_instance(data_in, num_shifts, data_out);
+	shl_32 shl_32_instance(data_in, num_shifts, data_out);
 	
 	initial
 		begin
