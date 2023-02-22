@@ -21,7 +21,7 @@ endmodule
 
 // 4-bit carry look-ahead adder
 module CLA4(input wire [3:0] Ra, input wire [3:0] Rb, input wire cin, output wire[3:0] sum, output wire cout);
-// Creating wires for Propoate and Generate
+// Creating wires for propagate and generate
 	wire [3:0] P,G,c;
 
 	assign P=Ra^Rb;	
