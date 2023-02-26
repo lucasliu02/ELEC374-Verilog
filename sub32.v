@@ -1,11 +1,11 @@
 module sub32(
-	input signed [31:0] a, b,
-	output reg signed [31:0] z
+	input signed [31:0] Ra, Rb,
+	output reg signed [31:0] diff
 );
 
 	always@(*)
 	begin
-		z <= a - b;
+		diff <= Ra - Rb;
 	end
 
 endmodule
