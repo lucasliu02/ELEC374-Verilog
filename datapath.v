@@ -113,8 +113,8 @@ module datapath(
 	
 	// alu
 	alu alu_unit(
-		.Ra(BusMuxOut),
-		.Rb(Yout),
+		.Ra(Yout),
+		.Rb(BusMuxOut),
 		.opcode(ALUopcode),
 		.Rc(RCout)
 	);

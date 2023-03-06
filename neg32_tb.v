@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-module div32_tb;
+module neg32_tb;
 	reg clk, clr;
 	reg R0in, R1in, R2in, R3in, R4in, R5in, R6in, R7in, R8in, R9in, R10in, R11in, R12in, R13in, R14in, R15in; // enables for general registers
 	reg R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out, R8out, R9out, R10out, R11out, R12out, R13out, R14out, R15out; // selects for 32:5 enc
@@ -15,7 +15,7 @@ module div32_tb;
 	
 	parameter	Default = 4'b0000, Reg_load1a= 4'b0001, Reg_load1b= 4'b0010,
 					Reg_load2a= 4'b0011, Reg_load2b = 4'b0100, Reg_load3a = 4'b0101,
-					Reg_load3b = 4'b0110, T0= 4'b0111, T1= 4'b1000,T2= 4'b1001, T3= 4'b1010, T4= 4'b1011, T5= 4'b1100, T6= 4'b1101;
+					Reg_load3b = 4'b0110, T0= 4'b0111, T1= 4'b1000,T2= 4'b1001, T3= 4'b1010, T4= 4'b1011;
 					
 	reg	[3:0] Present_state = Default;
 	
@@ -50,15 +50,13 @@ module div32_tb;
 			Reg_load1a		:	#40 Present_state = Reg_load1b;
 			Reg_load1b		:	#40 Present_state = Reg_load2a;
 			Reg_load2a		:	#40 Present_state = Reg_load2b;
-			Reg_load2b		:	#40 Present_state = T0; //Reg_load3a;
-			//Reg_load3a		:	#40 Present_state = Reg_load3b;
-			//Reg_load3b		:	#40 Present_state = T0;
+			Reg_load2b		:	#40 Present_state = Reg_load3a;
+			Reg_load3a		:	#40 Present_state = Reg_load3b;
+			Reg_load3b		:	#40 Present_state = T0;
 			T0					:	#40 Present_state = T1;
 			T1					:	#40 Present_state = T2;
 			T2					:	#40 Present_state = T3;
 			T3					:	#40 Present_state = T4;
-			T4					:	#40 Present_state = T5;
-			T5					:	#40 Present_state = T6;
 		endcase
 	end
 	
@@ -67,11 +65,10 @@ module div32_tb;
 		case(Present_state)
 			Default : begin			// initialize signals
 				PCout <= 0; Zlowout <= 0; Zhighout <= 0; MDRout <= 0;
-				R6out <= 0; R7out <= 0; MARin <= 0; Zhighin <= 0; Zlowin <= 0;
+				R0out <= 0; R1out <= 0; MARin <= 0; Zhighin <= 0; Zlowin <= 0;
 				PCin <= 0; MDRin <= 0; IRin <= 0; Yin <= 0;
 				IncPC <= 0; Read <= 0; ALUopcode <= 0;
-				R6in <= 0; R7in <= 0; Mdatain <= 32'h00000000;
-				HIin <= 0; LOin <= 0;
+				R0in <= 0; R1in <= 0; Mdatain <= 32'h00000000;
 			end
 			
 			Reg_load1a : begin
@@ -81,9 +78,9 @@ module div32_tb;
 				#15 Read <= 0; MDRin <= 0;
 			end
 			
-			Reg_load1b : begin					// initialize R6 with the value $12
-				#10 MDRout <= 1; R6in <= 1;
-				#15 MDRout <= 0; R6in <= 0;
+			Reg_load1b : begin					// initialize R0 with the value $12
+				#10 MDRout <= 1; R0in <= 1;
+				#15 MDRout <= 0; R0in <= 0;
 			end
 			
 			Reg_load2a : begin
@@ -92,30 +89,30 @@ module div32_tb;
 				#15 Read <= 0; MDRin <= 0;
 			end
 			
-			Reg_load2b : begin					// initialize R7 with the value $14
-				#10 MDRout <= 1; R7in <= 1;
-				#15 MDRout <= 0; R7in <= 0;
+			Reg_load2b : begin					// initialize R1 with the value $14
+				#10 MDRout <= 1; R1in <= 1;
+				#15 MDRout <= 0; R1in <= 0;
 			end
 			
-/*			Reg_load3a : begin
+			Reg_load3a : begin
 				Mdatain <= 32'h00000018;
 				#10 Read <= 1; MDRin <= 1;
 				#15 Read <= 0; MDRin <= 0;
 			end
 			
-			Reg_load3b : begin					// initialize R0 with the value $18
+/*			Reg_load3b : begin					// initialize R0 with the value $18
 				#10 MDRout <= 1; R0in <= 1;
 				#15 MDRout <= 0; R0in <= 0;
 			end
-*/			
+			
 			T0 : begin
 				PCout <= 1; MARin <= 1; IncPC <= 1; Zhighin <= 1; Zlowin <= 1;
 				#10 PCout <= 0; MARin <= 0; IncPC <= 0; Zhighin <= 0; Zlowin <= 0;
 			end
-			
+*/			
 			T1 : begin
 				#10 Zlowout <= 1; PCin <= 1; Read <= 1; MDRin <= 1;
-				Mdatain <= 32'h83380000;	// opcode for "div R6, R7"
+				Mdatain <= 32'h88080000;	// opcode for "neg R0, R1"
 				#15 Zlowout <= 0; PCin <= 0; Read <= 0; MDRin <= 0;
 			end
 			
@@ -125,23 +122,13 @@ module div32_tb;
 			end
 			
 			T3 : begin
-				#10 R6out <= 1; Yin <= 1;
-				#15 R6out <= 0; Yin <= 0;
+				#10 R1out <= 1; ALUopcode <= 5'b10001; Zhighin <= 1; Zlowin <= 1;
+				#15 R1out <= 0; Zhighin <= 0; Zlowin <= 0;
 			end
 			
 			T4 : begin
-				#10 R7out <= 1; ALUopcode <= 5'b10000; Zhighin <= 1; Zlowin <= 1;
-				#15 R7out <= 0; Zhighin <= 0; Zlowin <= 0;
-			end
-			
-			T5 : begin
-				#10 Zlowout <= 1; LOin <= 1;
-				#15 Zlowout <= 0; LOin <= 0;
-			end
-			
-			T6 : begin
-				#10 Zhighout <= 1; HIin <= 1;
-				#15 Zhighout <= 0; HIin <= 0;
+				#10 Zlowout <= 1; R0in <= 1;
+				#15 Zlowout <= 0; R0in <= 0;
 			end
 		endcase
 	end

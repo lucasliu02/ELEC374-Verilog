@@ -22,8 +22,8 @@ module alu(
 	rol32 rol32_instance(Ra, Rb[4:0], rol_out);
 	mul32 mul32_instance(Ra, Rb, mul_out);
 	div32 div32_instance(Ra, Rb, div_out);
-	neg32 neg32_instance(Ra, neg_out);
-	not32 not32_instance(Ra, not_out);
+	neg32 neg32_instance(Rb, neg_out);
+	not32 not32_instance(Rb, not_out);
 	
 	always@(*)
 	begin
