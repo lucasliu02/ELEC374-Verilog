@@ -3,7 +3,7 @@ module mdr(
 	input [31:0] BusMuxOut,
 	input [31:0] Mdatain,
 	input Read,
-	output [31:0] MDMux_out,
+	input [31:0] MDMux_out,
 	
 	// mdr
 	input clk,
