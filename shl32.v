@@ -4,7 +4,7 @@ module shl32(
 	output wire [31:0] data_out
 );
 
-	assign data_out[31:0] = data_in<<num_shifts;
+	assign data_out[31:0] = data_in << num_shifts;
 
 	
 endmodule

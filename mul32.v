@@ -30,7 +30,4 @@ module mul32(
 		end
 		p = sum;
 	end
-	
-
 endmodule
-	

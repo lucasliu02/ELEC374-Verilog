@@ -8,11 +8,11 @@ module alu(
 					MUL = 5'b01111, DIV = 5'b10000, NEG = 5'b10001, NOT = 5'b10010;
 	
 	wire [31:0] add_s, sub_d, and_out, or_out, shr_out, shra_out, shl_out, ror_out, rol_out, neg_out, not_out;
-	wire add_c/*, sub_c*/;
+	wire add_c, sub_c;
 	wire [63:0] mul_out, div_out;
 	
 	add32 add32_instance(Ra, Rb, {1'd0}, add_s, add_c);
-	sub32 sub32_instance(Ra, Rb, sub_d);
+	sub32 sub32_instance(Ra, Rb, sub_d, sub_c);
 	and32 and32_instance(Ra, Rb, and_out);
 	or32 or32_instance(Ra, Rb, or_out);
 	shr32 shr32_instance(Ra, Rb, shr_out);
@@ -30,12 +30,13 @@ module alu(
 		case(opcode)
 			ADD : begin
 				Rc[31:0] <= add_s[31:0];
-				Rc[63:32] <= 32'b0;
+				//Rc[63:32] <= 32'b0;
+				Rc[63:32] <= {31'b0, add_c};
 			end
 			
 			SUB : begin
 				Rc[31:0] <= sub_d[31:0];
-				Rc[63:32] <= 32'b0;
+				Rc[63:32] <= {31'b0, sub_c};
 			end
 			
 			AND : begin

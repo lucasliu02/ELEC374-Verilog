@@ -55,7 +55,7 @@ module mux_32_to_1(
 			5'd21 : BusMuxOut <= BusMuxIn_MDR;
 			5'd22 : BusMuxOut <= BusMuxIn_In_Port;
 			5'd23 : BusMuxOut <= C_sign_extended;
-			default BusMuxOut <= 32'b0;
+			default BusMuxOut <= 0;
 		endcase
 	end
 endmodule

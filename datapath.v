@@ -8,7 +8,7 @@ module datapath(
 	
 	input IncPC, // increment pc signal
 	input Read, // select Mdatain or BusMuxIn for MDMux
-	input [31:0] Mdatain, // mdr unit data
+	input [31:0] Mdatain, // mdr unit input from memory chip (simulated in Phase 1)
 	input [4:0] ALUopcode,
 	
 	output [63:0] RCout
