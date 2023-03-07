@@ -119,7 +119,7 @@ module rol32_tb;
 			
 			T2 : begin
 				#10 MDRout <= 1; IRin <= 1;
-				#15 MDRout <= 0; IRout <= 0;
+				#15 MDRout <= 0; IRin <= 0;
 			end
 			
 			T3 : begin

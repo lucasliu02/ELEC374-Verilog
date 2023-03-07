@@ -6,5 +6,4 @@ module shl32(
 
 	assign data_out[31:0] = data_in << num_shifts;
 
-	
 endmodule
